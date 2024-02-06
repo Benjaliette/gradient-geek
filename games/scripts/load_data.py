@@ -19,7 +19,8 @@ def run():
                     score = column['Score'],
                     genre = column['Genre'],
                     platform = column['Platform'],
-                    date = column['Date']
+                    date = column['Date'],
+                    stem_summary = column['stem_summary']
                 )
     except Exception:
         print("Error importing data")

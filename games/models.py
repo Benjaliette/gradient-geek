@@ -12,3 +12,4 @@ class Game(models.Model):
     genre = models.CharField(max_length=255)
     platform = models.CharField(max_length=255)
     date = models.CharField(max_length=255)
+    stem_summary = models.CharField(max_length=255)
