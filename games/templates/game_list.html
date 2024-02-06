@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recommandations de jeux vidéo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="my-3">Recommandations de jeux vidéo</h2>
+
+      <h4 class="my-3">Obtenir les noms des jeux selon le genre</h4>
+      <form action="/games" method="get">
+        <label for="category">Catégorie :</label>
+        <div class="row mb-3">
+          <div class="col-4">
+            <select
+              class="form-select"
+              arial-label="Sélectionnez une catégorie"
+              id="category"
+              name="category"
+              required
+            >
+              <option selected>Ouvrir ...</option>
+              <option value="Action"></option>
+              <option value="Action">Action</option>
+              <option value="Sport">Sport</option>
+              <option value="Music">Music</option>
+              <option value="Shooter">Shooter</option>
+              <option value="Adventure">Adventure</option>
+              <option value="Arcade">Arcade</option>
+              <option value="Visual Novel">Visual Novel</option>
+              <option value="Card Board Game">Card & Board Game</option>
+              <option value="Tactical">Tactical</option>
+              <option value="Point and Click">Point-and-Click</option>
+              <option value="MOBA">MOBA</option>
+              <option value="Real Time Strategy">Real Time Strategy</option>
+              <option value="Quiz/Trivia">Quiz/Trivia</option>
+              <option value="Pinball">Pinball</option>
+              <option value="RPG">RPG</option>
+              <option value="Brawler">Brawler</option>
+              <option value="Indie">Indie</option>
+              <option value="Turn Based Strategy">Turn Based Strategy</option>
+              <option value="Racing">Racing</option>
+              <option value="Platform">Platform</option>
+              <option value="Simulator">Simulator</option>
+              <option value="Fighting">Fighting</option>
+              <option value="Strategy">Strategy</option>
+              <option value="Puzzle">Puzzle</option>
+            </select>
+          </div>
+          <div class="col-8">
+            <button type="submit" class="btn btn-success">Rechercher</button>
+          </div>
+        </div>
+      </form>
+      <form action="/games" method="get">
+        <div class="mb-3">
+          <label for="reco" class="form-label"
+            >Recommandation (entrez deux jeux) :</label
+          >
+          <input
+            type="text"
+            class="form-control mb-1"
+            id="reco"
+            placeholder="1er jeu ..."
+          />
+          <input
+            type="text"
+            class="form-control"
+            id="reco"
+            placeholder="2ème jeu ..."
+          />
+        </div>
+        <button type="submit" class="btn btn-success">Rechercher</button>
+      </form>
+
+      <div class="row mt-5" style="height: 50vh">
+        <div class="col-4 border-end border-dark border-3">
+          <div>Recommandation catégorie :</div>
+          <ul>
+            {% for game in games %}
+            <li>
+              <span>{{ game.name }}</span>
+              <span>{{ game.genre }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="col-8">
+          <div>Recommandation :</div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
