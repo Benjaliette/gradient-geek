@@ -13,3 +13,4 @@ class Game(models.Model):
     platform = models.CharField(max_length=255)
     date = models.CharField(max_length=255)
     stem_summary = models.CharField(max_length=255)
+    overall_mean_score = models.CharField(max_length=255)

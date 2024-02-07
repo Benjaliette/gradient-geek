@@ -20,7 +20,7 @@ python manage.py migrate
 - Charger la BDD avec le fichier CSV
 
 ```
-python manage.py runscripts load_data
+python manage.py runscript load_data
 ```
 
 - Lancer le serveur en local

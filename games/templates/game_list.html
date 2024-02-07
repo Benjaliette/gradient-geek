@@ -17,7 +17,7 @@
       <h2 class="my-5 text-center">Recommandations de jeux vidéo</h2>
 
       <h4 class="my-3">Obtenir les noms des jeux selon le genre</h4>
-      <form action="/games" method="get" class="mb-5">
+      <form action="" method="get" class="mb-5">
         <label for="category">Catégorie :</label>
         <div class="row mb-3">
           <div class="col-4">
@@ -28,31 +28,10 @@
               name="category"
               required
             >
-              <option value="Action"></option>
-              <option value="Action">Action</option>
-              <option value="Sport">Sport</option>
-              <option value="Music">Music</option>
-              <option value="Shooter">Shooter</option>
-              <option value="Adventure">Adventure</option>
-              <option value="Arcade">Arcade</option>
-              <option value="Visual Novel">Visual Novel</option>
-              <option value="Card Board Game">Card & Board Game</option>
-              <option value="Tactical">Tactical</option>
-              <option value="Point and Click">Point-and-Click</option>
-              <option value="MOBA">MOBA</option>
-              <option value="Real Time Strategy">Real Time Strategy</option>
-              <option value="Quiz/Trivia">Quiz/Trivia</option>
-              <option value="Pinball">Pinball</option>
-              <option value="RPG">RPG</option>
-              <option value="Brawler">Brawler</option>
-              <option value="Indie">Indie</option>
-              <option value="Turn Based Strategy">Turn Based Strategy</option>
-              <option value="Racing">Racing</option>
-              <option value="Platform">Platform</option>
-              <option value="Simulator">Simulator</option>
-              <option value="Fighting">Fighting</option>
-              <option value="Strategy">Strategy</option>
-              <option value="Puzzle">Puzzle</option>
+              <option disabled selected value>Ouvrir ...</option>
+              {% for category in categories %}
+                  <option value={{ category }}>{{ category }}</option>
+              {% endfor %}
             </select>
           </div>
           <div class="col-8">
@@ -64,8 +43,11 @@
         {% csrf_token %}
         <div class="mb-3">
           <label for="reco" class="form-label"
-            >Recommandation (entrez deux jeux, une plateforme et si vous aimez ces choix) :</label
-          >
+            >Recommandation
+            <span class="fst-italic fw-light" style="font-size: 12px">
+              (entrez au moins deux jeux, une plateforme et si vous aimez ces choix)
+            </span> :
+          </label>
           <div class="row mb-3">
             <div class="col-6">
               <input
@@ -87,6 +69,24 @@
                 required
               />
             </div>
+            <div class="col-6">
+              <input
+                type="text"
+                class="form-control"
+                id="reco"
+                name="game-3"
+                placeholder="3ème jeu .. (optionnel)"
+              />
+            </div>
+            <div class="col-6">
+              <input
+                type="text"
+                class="form-control"
+                id="reco"
+                name="game-4"
+                placeholder="4ème jeu .. (optionnel)"
+              />
+            </div>
           </div>
           <div class="row mb-3">
             <div class="col-6">
@@ -97,6 +97,7 @@
                 name="platform"
                 required
               >
+                <option disabled selected value>Ouvrir ...</option>
                 {% for platform in platforms %}
                   <option value={{ platform }}>{{ platform }}</option>
                 {% endfor %}
@@ -125,7 +126,7 @@
             {% if games != None and games.count != 0 %}
               {% for game in games %}
               <li class="list-group-item mt-3">
-                <span>{{ game.name }}</span>
+                <span>{{ game.name }} ({{ game.platform }})</span>
               </li>
               {% endfor %}
             {% else %}
@@ -135,17 +136,30 @@
         </div>
         <div class="col-8">
           <div class="fw-semibold">Recommandations en fonction des jeux aimés :</div>
-          <ul class="list-group list-group-flush">
-            {% if reco_games != None and reco_games.count != 0 %}
-              {% for game in reco_games %}
-              <li class="list-group-item mt-3">
-                <span>{{ game.name }}</span>
-              </li>
-              {% endfor %}
-            {% else %}
-              <div class="mt-3 fst-italic">Pas de jeux recommandés</div>
-            {% endif %}
-          </ul>
+          {% if reco_games != None and reco_games.count != 0 %}
+            <table class="table mt-3">
+              <thead>
+                <tr>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Genre</th>
+                  <th scope="col">Score</th>
+                  <th scope="col">Distance similarité</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for game in reco_games %}
+                <tr>
+                  <td>{{ game.name }}</td>
+                  <td>{{ game.genre }}</td>
+                  <td>{{ game.score }}</td>
+                  <td>{{ game.overall_mean_score }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <div class="mt-3 fst-italic">Pas de jeux recommandés</div>
+          {% endif %}
         </div>
       </div>
     </div>

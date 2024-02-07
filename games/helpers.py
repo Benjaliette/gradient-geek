@@ -170,6 +170,7 @@ def get_recommendations(
             filtered_recommendations = filtered_recommendations.sort_values(
                 by="overall_mean_score", ascending=True
             )
+
             return filtered_recommendations[
                 [
                     "name",
